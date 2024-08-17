@@ -39,7 +39,7 @@ function drawLetters(){
 function drawLetter(code){
   let width = 0;
   
-  for(const [command,index] of code.split(' ').entries()){
+  for(const [index,command] of Object.entries(code.split(' '))){
     if(command.startsWith('(')){
       ctx.beginPath();
       ctx.moveTo(...movePoint(command));
@@ -56,7 +56,7 @@ function drawLetter(code){
     if(command.startsWith('C')){
       //arc
     }
-    if(command[index+1].startsWith('(')||index==code.split(' ').length){
+    if(index==code.split(' ').length||command[index+1].startsWith('(')){
       ctx.stroke();
     }
   }

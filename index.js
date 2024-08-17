@@ -17,9 +17,9 @@ function setCode(){
 function drawLetters(){
   let input = document.querySelector('#input-textarea').value;
   x = 0;
-  y = font_size;
+  y = font_size*10;
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-  ctx.lineWidth = font_weight*font_size/16;
+  ctx.lineWidth = font_weight*font_size;
   
   while(input!=''){
     for(const code of codes){
@@ -61,7 +61,7 @@ function drawLetter(code){
       ctx.stroke();
     }
   }
-  x += width+kerning;
+  x += (width+kerning)*font_size;
 }
 
 function toArray(point){
@@ -70,5 +70,5 @@ function toArray(point){
 
 function movePoint(point){
   point_before=toArray(point);
-  return [point_before[0]*font_size/8+x, -point_before[1]*font_size/8+y];
+  return [point_before[0]*font_size+x, -point_before[1]*font_size+y];
 }

@@ -15,8 +15,8 @@ textarea {
     outline: none;
     resize: none;
     background-color: #00000000;
-    font-family:'Open Sans';
-    font-size:1rem;
+    font-family: 'Open Sans';
+    font-size: 1rem;
 }
 
 #control{
@@ -24,27 +24,46 @@ textarea {
     height:50px;
     margin: 0 auto;
     margin-top: 10px;
-    border-radius:20px;
+    border-radius: 20px;
     background-color: #777FFF;
     color: #282828;
 }
 
-#input, #output{
+#input{
     width: 300px;
     height:100px;
     margin: 0 auto;
     margin-top: 10px;
-    border-radius:20px;
+    border-radius: 20px;
     background-color: #777FFF;
     color: #282828;
 }
 
-#code{
+#output{
+    display: flex;
     width: 300px;
-    min-height:100px;
+    height:100px;
     margin: 0 auto;
     margin-top: 10px;
-    border-radius:20px;
+    border-radius: 20px;
+    background-color: #777FFF;
+    color: #282828;
+    justify-content: center;
+    align-items: center;
+}
+
+#output-canvas{
+    display: flex;
+    width: 270px;
+    height: 90px;
+}
+
+#code{
+    width: 300px;
+    min-height: 100px;
+    margin: 0 auto;
+    margin-top: 10px;
+    border-radius: 20px;
     background-color: #777FFF;
     color: #282828;
 }

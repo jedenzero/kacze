@@ -8,7 +8,7 @@ function setCode(){
   let raw_code = document.querySelector('#code-textarea').value;
 
   raw_code.split('\n').forEach(row=>{
-    code.push([row.split(': ')[0], row.split(': ')[1]]);
+    codes.push([row.split(': ')[0], row.split(': ')[1]]);
   });
 }
 
@@ -19,7 +19,7 @@ function drawLetters(){
     for(const code of codes){
       const codeReg=new RegExp(`^${code[0]}`);
       if(codeReg.test(input)){
-        input.replace(codeReg,'');
+        input=input.replace(codeReg,'');
         drawLetter(code[1]);
         break;
       }

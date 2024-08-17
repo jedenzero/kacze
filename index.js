@@ -1,5 +1,5 @@
-var x, y = 0;
-var kerning, leading = 10;
+var x = 0, y = 0;
+var kerning = 0, leading = 10;
 var font_size = 16;
 var font_weight = 2;
 var codes = [];
@@ -38,15 +38,16 @@ function drawLetter(code){
   ctx.lineWidth = font_weight*font_size/10;
   code.split(', ').forEach(stroke=>{
     ctx.beginPath();
-    ctx.moveTo(movePoint(stroke.split(' ')[0]));
+    ctx.moveTo(...movePoint(stroke.split(' ')[0]));
     stroke.split(' ').slice(1).forEach(command=>{
       if(command.startsWith('L')){
-        ctx.lineTo(movePoint(command.slice(1)));
+        ctx.lineTo(...movePoint(command.slice(1)));
       }
       if(command.startsWith('C')){
         //arc
       }
     });
+    ctx.stroke();
   });
   x += kerning;
 }

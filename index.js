@@ -1,7 +1,7 @@
 var x = 0, y = 0;
 var kerning = 10, leading = 10;
 var font_size = 16;
-var font_weight = 2;
+var font_weight = 1;
 var codes = [];
 const ctx = document.querySelector('#output-canvas').getContext('2d');
 
@@ -39,7 +39,8 @@ function drawLetters(){
 function drawLetter(code){
   let width = 0;
   
-  for(const [index,command] of Object.entries(code.split(' '))){
+  for(let i=0;i<code.split(' ').length;i++){
+    const command = code.split(' ')[i];
     if(command.startsWith('(')){
       ctx.beginPath();
       ctx.moveTo(...movePoint(command));
@@ -56,7 +57,7 @@ function drawLetter(code){
     if(command.startsWith('C')){
       //arc
     }
-    if(index==code.split(' ').length-1||code.split(' ')[index+1].startsWith('(')){
+    if(i==code.split(' ').length-1||code.split(' ')[i+1].startsWith('(')){
       ctx.stroke();
     }
   }

@@ -56,7 +56,7 @@ function drawLetter(code){
     if(command.startsWith('C')){
       //arc
     }
-    if(index==code.split(' ').length||command[index+1].startsWith('(')){
+    if(index==code.split(' ').length-1||command[index+1].startsWith('(')){
       ctx.stroke();
     }
   }

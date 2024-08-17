@@ -6,26 +6,6 @@ body {
     font-family:'Open Sans';
 }
 
-#control{
-    width: 300px;
-    height:50px;
-    margin: 0 auto;
-    margin-top: 10px;
-    border-radius:20px;
-    background-color: #777FFF;
-    color: #282828;
-}
-
-#input, #output, #code {
-    width: 300px;
-    height:100px;
-    margin: 0 auto;
-    margin-top: 10px;
-    border-radius:20px;
-    background-color: #777FFF;
-    color: #282828;
-}
-
 textarea {
     box-sizing: border-box;
     width: 100%;
@@ -36,4 +16,34 @@ textarea {
     background-color: #00000000;
     font-family:'Open Sans';
     font-size:1rem;
+}
+
+#control{
+    width: 300px;
+    height:50px;
+    margin: 0 auto;
+    margin-top: 10px;
+    border-radius:20px;
+    background-color: #777FFF;
+    color: #282828;
+}
+
+#input, #output{
+    width: 300px;
+    height:100px;
+    margin: 0 auto;
+    margin-top: 10px;
+    border-radius:20px;
+    background-color: #777FFF;
+    color: #282828;
+}
+
+#code{
+    width: 300px;
+    min-height:100px;
+    margin: 0 auto;
+    margin-top: 10px;
+    border-radius:20px;
+    background-color: #777FFF;
+    color: #282828;
 }

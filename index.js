@@ -1,5 +1,5 @@
 var x = 0, y = 0;
-var kerning = 10, leading = 10;
+var kerning = 2, leading = 5;
 var font_size = 16;
 var font_weight = 1;
 var codes = [];

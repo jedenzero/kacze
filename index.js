@@ -1,8 +1,9 @@
 var x = 0, y = 0;
-var kerning = 0, leading = 10;
+var kerning = 10, leading = 10;
 var font_size = 16;
 var font_weight = 2;
 var codes = [];
+const ctx = document.querySelector('#output-canvas').getContext('2d');
 
 function setCode(){
   let raw_code = document.querySelector('#code-textarea').value;
@@ -17,6 +18,8 @@ function drawLetters(){
   let input = document.querySelector('#input-textarea').value;
   x = 0;
   y = font_size;
+  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+  ctx.lineWidth = font_weight*font_size/16;
   
   while(input!=''){
     for(const code of codes){
@@ -34,26 +37,37 @@ function drawLetters(){
 }
 
 function drawLetter(code){
-  const ctx = document.querySelector('#output-canvas').getContext('2d');
-  ctx.lineWidth = font_weight*font_size/10;
-  code.split(', ').forEach(stroke=>{
-    ctx.beginPath();
-    ctx.moveTo(...movePoint(stroke.split(' ')[0]));
-    stroke.split(' ').slice(1).forEach(command=>{
-      if(command.startsWith('L')){
-        ctx.lineTo(...movePoint(command.slice(1)));
+  let width = 0;
+  
+  for(const [command,index] of code.split(' ').entries()){
+    if(command.startsWith('(')){
+      ctx.beginPath();
+      ctx.moveTo(...movePoint(command));
+      if(toArray(command)[0]>width){
+        width = toArray(command)[0];
       }
-      if(command.startsWith('C')){
-        //arc
+    }
+    if(command.startsWith('L')){
+      ctx.lineTo(...movePoint(command.slice(1)));
+      if(toArray(command.slice(1))[0]>width){
+        width = toArray(command.slice(1))[0];
       }
-    });
-    ctx.stroke();
-  });
-  x += kerning;
+    }
+    if(command.startsWith('C')){
+      //arc
+    }
+    if(command[index+1].startsWith('(')||index==code.split(' ').length){
+      ctx.stroke();
+    }
+  }
+  x += width+kerning;
 }
 
-function movePoint(point_before){
-  point_before = point_before.slice(1, -1).split(',').map(Number);
-  const point_after = [point_before[0]*font_size/8+x, point_before[1]*font_size/8+y]
-  return point_after;
+function toArray(point){
+  return point.slice(1, -1).split(',').map(Number);
+}
+
+function movePoint(point){
+  point_before=toArray(point);
+  return [point_before[0]*font_size/8+x, -point_before[1]*font_size/8+y];
 }

@@ -60,8 +60,11 @@ function drawLetter(code){
       }
     }
     if(command.startsWith('C')){
-      ctx.arcTo(...coordinates,...movePoint(toArray(command.slice(1))[0]),...toArray(command.slice(1))[1]);
-      coordinates = toArray(toArray(command.slice(1))[0]);
+      const command_array = toArray(command.slice(1));
+      const coordinates_after = movePoint(`(${command_array[0]},${command_array[1]})`);
+      
+      ctx.arcTo(...coordinates,...coordinates_after,command_array[2]*font_size);
+      coordinates = coordinates_after;
     }
     if(i==code.split(' ').length-1||code.split(' ')[i+1].startsWith('(')){
       ctx.stroke();
@@ -70,8 +73,8 @@ function drawLetter(code){
   x += (width+kerning)*font_size;
 }
 
-function toArray(point){
-  return point.slice(1, -1).split(',').map(el=>isNaN(Number(el))?el:Number(el));
+function toArray(str){
+  return str.slice(1, -1).split(',').map(el=>isNaN(Number(el))?el:Number(el));
 }
 
 function movePoint(point){

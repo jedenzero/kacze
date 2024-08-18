@@ -38,24 +38,30 @@ function drawLetters(){
 
 function drawLetter(code){
   let width = 0;
+  let coordinates = [];
   
   for(let i=0;i<code.split(' ').length;i++){
     const command = code.split(' ')[i];
     if(command.startsWith('(')){
+      coordinates = movePoint(command);
+      
       ctx.beginPath();
-      ctx.moveTo(...movePoint(command));
+      ctx.moveTo(...coordinates);
       if(toArray(command)[0]>width){
         width = toArray(command)[0];
       }
     }
     if(command.startsWith('L')){
-      ctx.lineTo(...movePoint(command.slice(1)));
+      coordinates = movePoint(command.slice(1));
+      
+      ctx.lineTo(...coordinates);
       if(toArray(command.slice(1))[0]>width){
         width = toArray(command.slice(1))[0];
       }
     }
     if(command.startsWith('C')){
-      //arc
+      ctx.arcTo(...coordinates,...movePoint(toArray(command.slice(1))[0]),...toArray(command.slice(1))[1]);
+      coordinates = toArray(toArray(command.slice(1))[0]);
     }
     if(i==code.split(' ').length-1||code.split(' ')[i+1].startsWith('(')){
       ctx.stroke();
@@ -65,7 +71,7 @@ function drawLetter(code){
 }
 
 function toArray(point){
-  return point.slice(1, -1).split(',').map(Number);
+  return point.slice(1, -1).split(',').map(el=>isNaN(Number(el))?el:Number(el));
 }
 
 function movePoint(point){

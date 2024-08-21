@@ -62,8 +62,9 @@ function drawLetter(code){
     if(command.startsWith('C')){
       const command_array = toArray(command.slice(1));
       const coordinates_after = movePoint(`(${command_array[0]},${command_array[1]})`);
+      const start_angle = Math.atan2(coordinates[1]-coordinates_after[1],coordinates[0]-coordinates_after[0]);
       
-      ctx.arcTo(...coordinates,...coordinates_after,command_array[2]*font_size);
+      ctx.arc(...coordinates_after,command_array[2],start_angle,start_angle+command_array[3]/180*Math.PI,true);
       coordinates = coordinates_after;
     }
     if(i==code.split(' ').length-1||code.split(' ')[i+1].startsWith('(')){

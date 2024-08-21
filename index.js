@@ -1,6 +1,6 @@
 var x = 0, y = 0;
 var kerning = 2, leading = 5;
-var font_size = 16;
+var font_size = 20;
 var font_weight = 1;
 var codes = [];
 const ctx = document.querySelector('#output-canvas').getContext('2d');
